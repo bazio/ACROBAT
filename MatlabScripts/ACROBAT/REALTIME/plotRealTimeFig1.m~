@@ -1,0 +1,55 @@
+function [sp, p] = plotRealTimeFig1( acrobat, CTD, ECO)
+
+% function [sp, p ] = plotRealTimeFig1( acrobat, CTD, ECO)
+%
+% Plot the latest data from the ACROBAT in Figure 1
+%
+% KIM 08.12
+
+
+% delete the plots first
+if ishandle( 'p' )
+    delete( p )
+    clear p
+end
+
+% plot pressure
+axes(sp(1))
+p(1) = plot( acrobat.mtime(end) - acrobat.mtime, CTD.p, 'r-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM', 'keeplimits')
+ylabel( {'pressure [db]'}, 'color', 'r'); grid on
+set( sp(1), 'xticklabel', [], 'Xdir', 'reverse')
+
+% temperature
+axes(sp(2))
+p(2) = plot( acrobat.mtime(end) - acrobat.mtime, CTD.t, 'c-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM', 'keeplimits')
+set( sp(2), 'xticklabel', [], 'Xdir', 'reverse'); grid on
+ylabel( {'temp [\circ C]'}, 'color', 'c')
+
+% salinity
+axes(sp(3))
+p(3) = plot( acrobat.mtime(end) - acrobat.mtime, CTD.s, 'y-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM:SS', 'keeplimits')
+set( sp(3), 'xticklabel', [], 'Xdir', 'reverse'); grid on
+ylabel( {'salinity [\circ C]'}, 'color', 'y')
+
+% chlorophyll
+axes(sp(4))
+p(4) = plot( acrobat.mtime(end) - acrobat.mtime, ECO.chl, 'g-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM:SS', 'keeplimits')
+set( sp(4), 'xticklabel', [],'Xdir', 'reverse'); grid on
+ylabel( {'Chl [\mug/l]'}, 'color', 'g')
+
+% particle concentraion
+axes(sp(5))
+p(5) = plot( acrobat.mtime(end) - acrobat.mtime, ECO.particle, 'b-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM:SS', 'keeplimits')
+set( sp(5), 'xticklabel', [], 'Xdir', 'reverse'); grid on
+ylabel( {'particle [1/m*sr]'}, 'color', 'b')
+
+axes(sp(6))
+p(6) = plot( acrobat.mtime(end) - acrobat.mtime, ECO.CDOM, 'm-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM', 'keeplimits')
+set( sp(6), 'Xdir', 'reverse'); grid on
+ylabel( {'CDOM [ppb]'}, 'color', 'm')
+xlabel( 'Time elapsed [min]')
+
+global p sp
+
+
+

@@ -1,0 +1,5 @@
+function [datin] = parseGPSraw( datin )
+
+% function [datin] = parseGPSraw( datin )
+%
+% Parse the raw 

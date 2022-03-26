@@ -1,0 +1,72 @@
+%%  ACROBAT REALTIME DATA FEED
+
+% use this worksheet to run the data feed
+
+%%
+
+
+%% DEFINE TARGETS
+% -------------------------------------------------------------------------
+% local location of the files
+localdir = '/Users/kmartini/RESEARCH/Acrobat/Data/ACROBAT'
+% remote location of the files
+targetdir = 'C:\Users\NorsemanII\DATA\Chukchi2012\ACROBAT\REALTIME';
+% IP address of target
+targetIP = '192.168.10.21:21';
+% username
+user = 'chukchi';
+% password
+psswrd = 'sea';
+% -------------------------------------------------------------------------
+
+%% DEFINE SOME OTHER CHARACTERISTICS
+% -------------------------------------------------------------------------
+% plot update rate
+updaterate = 60; % updates every 60 seconds/1 minute
+% plot time span
+minutes = 2; 
+twin = minutes./60./24; %convert to yeardays (change this at some point)
+% -------------------------------------------------------------------------
+
+%% LOAD THE TIMESERIES PLOTS
+% -------------------------------------------------------------------------
+makeRealTimeFig1;
+makeRealTimeFig2;
+% -------------------------------------------------------------------------
+
+%%  SETUP THE DATA REFRESH TIMER
+% -------------------------------------------------------------------------
+% define the timer
+a = timer; 
+% set the timer to execute the function at an interval
+set( a, 'executionmode', 'fixedrate')
+% set the period (this case 60 seconds = 1min)
+set(a, 'period', 60)
+% set the function the timer is going to execute
+set( a, 'TimerFcn', 'toc(astart)')
+% -------------------------------------------------------------------------
+
+%%  START THE REALTIME DISPLAY
+% -------------------------------------------------------------------------
+% define the start time
+astart = tic; 
+% start the timer
+start(a)
+% -------------------------------------------------------------------------
+
+ 
+%%  PULL THE DATA FROM THE REMOTE COMPUTER USING FTP
+% -------------------------------------------------------------------------
+FTPAcrobatREALTIME(targetIP, user, psswrd, targetdir)
+
+
+%% PROCESS DATA ON LOCAL MACHINE FOR THE REALTIME DISPLAY
+% -------------------------------------------------------------------------
+[acrobat, CTD, ECO] = ProcessAcrobatREALTIME( localdir, twin)
+
+
+%% PLOT THE LOCAL DATA
+plotRealTimeFig1(acrobat, CTD, ECO);
+plotRealTimeFig2(acrobat, CTD, ECO);
+
+%%

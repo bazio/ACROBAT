@@ -1,0 +1,62 @@
+function plotRealTimeFig1( acrobat, CTD, ECO, sp )
+
+% function plotRealTimeFig2( acrobat, CTD, ECO, sp)
+%
+% Plot the latest data from the ACROBAT in Figure 1 as a pressure-time
+% scatter plot.
+%
+% KIM 08.12
+
+
+% delete the plots first
+if ishandle( 'sc' )
+    delete( sc )
+end
+clear global
+
+% make the plot handle a global variable
+global sc
+
+% plot pressure
+axes(sp(1))
+sc(1) = scatter( acrobat.mtime(end) - acrobat.mtime, CTD.p, 10, CTD.t, 'filled' ); axis tight;  datetick( 'x', 'MM', 'keeplimits')
+ylabel( {'pressure [db]'}, 'color', 'w'); grid on; c
+set( sp(1), 'xticklabel', [], 'Xdir', 'reverse')
+titleout( 'temperature')
+
+% temperature
+axes(sp(2))
+sc(2) = scatter( acrobat.mtime(end) - acrobat.mtime, CTD.p, 10, CTD.s, 'filled' ); axis tight;  datetick( 'x', 'MM', 'keeplimits')
+ylabel( {'pressure [db]'}, 'color', 'w'); grid on;  colorbar
+set( sp(1), 'xticklabel', [], 'Xdir', 'reverse')
+titleout( 'salinity')
+% 
+% % salinity
+% axes(sp(3))
+% sc(3) = plot( acrobat.mtime(end) - acrobat.mtime, CTD.s, 'y-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM:SS', 'keeplimits')
+% set( sp(3), 'xticklabel', [], 'Xdir', 'reverse'); grid on
+% ylabel( {'salinity [\circ C]'}, 'color', 'y')
+% 
+% % chlorophyll
+% axes(sp(4))
+% sc(4) = plot( acrobat.mtime(end) - acrobat.mtime, ECO.chl, 'g-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM:SS', 'keeplimits')
+% set( sp(4), 'xticklabel', [],'Xdir', 'reverse'); grid on
+% ylabel( {'Chl [\mug/l]'}, 'color', 'g')
+% 
+% % particle concentration
+% axes(sp(5))
+% sc(5) = plot( acrobat.mtime(end) - acrobat.mtime, ECO.particle, 'b-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM:SS', 'keeplimits')
+% set( sp(5), 'xticklabel', [], 'Xdir', 'reverse'); grid on
+% ylabel( {'particle [1/m*sr]'}, 'color', 'b')
+% 
+% % CDOM
+% axes(sp(6))
+% sc(6) = plot( acrobat.mtime(end) - acrobat.mtime, ECO.CDOM, 'm-', 'linewidth', 2 ); axis tight;  datetick( 'x', 'MM', 'keeplimits')
+% set( sp(6), 'Xdir', 'reverse'); grid on
+% ylabel( {'CDOM [ppb]'}, 'color', 'm')
+% xlabel( 'Time elapsed [min]')
+% 
+
+
+
+
