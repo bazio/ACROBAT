@@ -78,7 +78,7 @@ saveCruiseLegs( top_dir, cruise_name, leg, llims)
 %viewMapCruiseTrack(top_dir, cruise_name )
 % 
 %% STEP 6: MAKE ROUGH SUMMARY PLOTS OF THE RAW DATA 
-plotAcrobatCruiseLegsDistanceMap_TS(top_dir, cruise_name);
+%plotAcrobatCruiseLegsDistanceMap_TS(top_dir, cruise_name);
 
 %% STEP 6: MAKE ROUGH SUMMARY PLOTS OF THE RAW DATA (distance vs. depth)
 %plotAcrobatCruiseLegs4(top_dir, cruise_name)
